@@ -1,38 +1,54 @@
-<section id="gramatica-aula1">
-    <h3>Grammaire: Les bases</h3>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Francês Básico - Aula 1</title>
+    <style>
+        body { font-family: sans-serif; display: flex; margin: 0; background-color: #f4f4f9; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
+        .content { flex-grow: 1; padding: 40px; }
+        .progress-bar { background: #34495e; height: 10px; border-radius: 5px; margin: 10px 0; }
+        #progress-fill { background: #2ecc71; height: 100%; width: 12.5%; }
+        button { background: #3498db; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
 
-    <!-- Tabela de Pronomes Pessoais -->
-    <h4>1. Pronomes Pessoais (Les pronoms personnels)</h4>
-    <table class="tabela-gramatica">
-        <thead>
-            <tr>
-                <th>Singular</th>
-                <th>Plural</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Je</strong> (Eu)</td>
-                <td><strong>Nous</strong> (Nós)</td>
-            </tr>
-            <tr>
-                <td><strong>Tu</strong> (Tu/Você)</td>
-                <td><strong>Vous</strong> (Vós/Você/Vocês)</td>
-            </tr>
-            <tr>
-                <td><strong>Il / Elle</strong> (Ele/Ela)</td>
-                <td><strong>Ils / Elles</strong> (Eles/Elas)</td>
-            </tr>
-        </tbody>
-    </table>
+    <nav class="sidebar">
+        <h2>Francês Básico</h2>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+        <ul>
+            <li><a href="#" style="color:white" onclick="carregarAula(1)">Aula 1: Présentation</a></li>
+        </ul>
+    </nav>
 
-    <!-- Tabela do Verbo Être -->
-    <h4>2. Verbo Être (Presente do Indicativo)</h4>
-    <table class="tabela-gramatica">
-        <tbody>
-            <tr><td>Je <strong>suis</strong></td><td>Nous <strong>sommes</strong></td></tr>
-            <tr><td>Tu <strong>es</strong></td><td>Vous <strong>êtes</strong></td></tr>
-            <tr><td>Il / Elle <strong>est</strong></td><td>Ils / Elles <strong>sont</strong></td></tr>
-        </tbody>
-    </table>
-</section>
+    <main class="content" id="conteudo-aula">
+        <h1>Bem-vindo</h1>
+        <p>Selecione a aula no menu lateral.</p>
+    </main>
+
+    <script>
+        const lecons = {
+            1: {
+                titulo: "Aula 1: Présentation",
+                introducao: "Nesta lição, aprenderá a fazer saudações formais e informais e a apresentar-se[span_0](start_span)[span_0](end_span).",
+                cumprimentos: ["Bonjour (Formal)", "Salut (Informal)", "Bonsoir (Boa noite)"],
+                gramatica: ["Je suis (Eu sou)", "Tu es (Tu és/Você é)", "Il/Elle est (Ele/Ela é)", "Nous sommes (Nós somos)", "Vous êtes (Vocês são)", "Ils/Elles sont (Eles/Elas são)"]
+            }
+        };
+
+        function carregarAula(num) {
+            const aula = lecons[num];
+            document.getElementById('conteudo-aula').innerHTML = `
+                <h1>${aula.titulo}</h1>
+                <p>${aula.introducao}</p>
+                <h3>1. Comunicação</h3>
+                <ul>${aula.cumprimentos.map(c => `<li>${c}</li>`).join('')}</ul>
+                <h3>2. Gramática: Verbo Être</h3>
+                <ul>${aula.gramatica.map(g => `<li>${g}</li>`).join('')}</ul>
+            `;
+        }
+    </script>
+</body>
+</html>
+
