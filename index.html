@@ -1,79 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>App Francês Básico</title>
+    <title>Central de Estudos Francês A1 - Idney Max</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; background-color: #fdfbf7; }
-        .sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; box-sizing: border-box; }
-        .content { flex-grow: 1; padding: 40px; }
-        h1 { color: #2c3e50; border-bottom: 3px solid #27ae60; padding-bottom: 10px; }
-        .exercise { margin-top: 30px; padding: 20px; background: #e8f6ed; border-radius: 5px; border-left: 5px solid #27ae60; }
-        .btn { background: #27ae60; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; margin-top: 10px; }
-        li { margin-bottom: 8px; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; padding: 20px; background: #f4f4f9; max-width: 800px; margin: auto; }
+        .box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        input { padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #2980b9; }
+        .card-container { display: flex; gap: 10px; overflow-x: auto; padding: 10px; }
+        .card { width: 150px; height: 100px; border: 2px solid #3498db; display: flex; align-items: center; justify-content: center; background: #fff; cursor: pointer; border-radius: 8px; text-align: center; }
+        .card:hover { background: #3498db; color: white; }
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
-        <h2>Francês Básico</h2>
-        <ul>
-            <li><a href="#" style="color:white; text-decoration:none;" onclick="carregarAula1()">Aula 1: Présentation</a></li>
-            <li><a href="#" style="color:white; text-decoration:none;" onclick="carregarAula2()">Aula 2: Faire Connaissance</a></li>
-        </ul>
-    </nav>
+    <h1>🚀 Central de Estudos Francês A1</h1>
 
-    <main class="content" id="conteudo-aula">
-        <h1>Bem-vindo</h1>
-        <p>Selecione uma aula no menu lateral para começar seus estudos.</p>
-    </main>
+    <!-- 1. Flashcards -->
+    <div class="box">
+        <h2>Flashcards: Vocabulário</h2>
+        <div class="card-container">
+            <div class="card" onclick="alert('Eu falei')">J'ai parlé</div>
+            <div class="card" onclick="alert('Você terminou')">Tu as fini</div>
+            <div class="card" onclick="alert('Nós escolhemos')">Nous avons choisi</div>
+            <div class="card" onclick="alert('Eu me levanto')">Je me lève</div>
+            <div class="card" onclick="alert('Siga em frente')">Tout droit</div>
+        </div>
+    </div>
+
+    <!-- 2. Desafio Final (Relatório) -->
+    <div class="box">
+        <h2>Desafio: Relatório do Recepcionista</h2>
+        <p>1. À 7h, je <input type="text" id="df1"> (arriver) à l'hôtel.</p>
+        <p>2. Le client <input type="text" id="df2"> (vouloir) une chambre.</p>
+        <p>3. J' <input type="text" id="df3"> (accueillir) le client.</p>
+        <button onclick="validarRelatorio()">Validar Relatório</button>
+        <p id="resRelatorio"></p>
+    </div>
+
+    <!-- 3. Desafio Auxiliares -->
+    <div class="box">
+        <h2>Desafio: Avoir vs Être</h2>
+        <p>1. J' <input type="text" id="a1"> mangé. | 2. Je <input type="text" id="a2"> allé.</p>
+        <button onclick="validarAux()">Validar Auxiliares</button>
+        <p id="resAux"></p>
+    </div>
+
+    <!-- 4. Roleplays -->
+    <div class="box">
+        <h2>Roleplay: Atendimento (Café & Hotel)</h2>
+        <p><b>Café:</b> "Vous voulez une table pour combien de personnes?"</p>
+        <input type="text" id="cafeInput"><button onclick="validarCafe()">Responder</button>
+        <p id="cafeFeed"></p>
+        
+        <p><b>Hotel:</b> "J'ai une réservation au nom de Rodrigues."</p>
+        <input type="text" id="hotelInput"><button onclick="validarHotel()">Responder</button>
+        <p id="hotelFeed"></p>
+    </div>
 
     <script>
-        function carregarAula1() {
-            const html = `
-                <h1>Aula 1: Présentation</h1>
-                <h3>Conceitos</h3>
-                <ul>
-                    <li>Bonjour, Salut, Bonsoir</li>
-                    <li>Verbo Être: Je suis, Tu es, Il/Elle est, Nous sommes, Vous êtes</li>
-                </ul>
-                <div class="exercise">
-                    <h3>Exercício: Complete com o verbo Être</h3>
-                    <p>Je _____ étudiant. <input type="text" id="ex1"></p>
-                    <button class="btn" onclick="verificarAula1()">Verificar</button>
-                    <p id="res1"></p>
-                </div>
-            `;
-            document.getElementById('conteudo-aula').innerHTML = html;
+        function validarRelatorio() {
+            let acertos = 0;
+            if (document.getElementById('df1').value.toLowerCase() === "suis arrivé") acertos++;
+            if (document.getElementById('df2').value.toLowerCase() === "a voulu") acertos++;
+            if (document.getElementById('df3').value.toLowerCase() === "ai accueilli") acertos++;
+            document.getElementById('resRelatorio').innerHTML = "Acertos: " + acertos + "/3";
         }
 
-        function carregarAula2() {
-            const html = `
-                <h1>Aula 2: Faire Connaissance</h1>
-                <h3>Verbos em -ER (Ex: Parler)</h3>
-                <p>Terminações: -e, -es, -e, -ons, -ez, -ent.</p>
-                <ul>
-                    <li>Je parle, Tu parles, Il parle</li>
-                    <li>Nous parlons, Vous parlez, Ils parlent</li>
-                </ul>
-                <div class="exercise">
-                    <h3>Exercício: Conjugação</h3>
-                    <p>Je _____ (habiter) à Brasília. <input type="text" id="ex2"></p>
-                    <button class="btn" onclick="verificarAula2()">Verificar</button>
-                    <p id="res2"></p>
-                </div>
-            `;
-            document.getElementById('conteudo-aula').innerHTML = html;
+        function validarAux() {
+            let acertos = 0;
+            if (document.getElementById('a1').value.toLowerCase() === "ai") acertos++;
+            if (document.getElementById('a2').value.toLowerCase() === "suis") acertos++;
+            document.getElementById('resAux').innerHTML = "Acertos: " + acertos + "/2";
         }
 
-        function verificarAula1() {
-            const res = document.getElementById('ex1').value.toLowerCase();
-            document.getElementById('res1').innerHTML = (res === "suis") ? "<b>Correto!</b>" : "<b>Tente novamente.</b>";
+        function validarCafe() {
+            let r = document.getElementById('cafeInput').value.toLowerCase();
+            document.getElementById('cafeFeed').innerHTML = r.includes("deux") ? "Bravo! Próximo: Qu'est-ce que vous voulez boire?" : "Tente: Une table pour deux.";
         }
 
-        function verificarAula2() {
-            const res = document.getElementById('ex2').value.toLowerCase();
-            document.getElementById('res2').innerHTML = (res === "habite") ? "<b>Correto!</b>" : "<b>Lembre-se da terminação -e.</b>";
+        function validarHotel() {
+            let r = document.getElementById('hotelInput').value.toLowerCase();
+            document.getElementById('hotelFeed').innerHTML = (r.includes("bonjour") || r.includes("bienvenue")) ? "Excelente! Próximo: 'Voici votre clé'." : "Tente um cumprimento formal.";
         }
     </script>
 </body>
