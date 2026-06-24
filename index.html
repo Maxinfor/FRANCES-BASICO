@@ -2,90 +2,99 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Central de Estudos Francês A1 - Idney Max</title>
+    <title>Curso Completo de Francês A1 - Idney Max</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; padding: 20px; background: #f4f4f9; max-width: 800px; margin: auto; }
-        .box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        input { padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 8px 15px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 4px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 800px; margin: auto; }
+        .box { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; }
+        h2 { color: #2980b9; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+        input { padding: 10px; width: 200px; border: 1px solid #ddd; border-radius: 6px; }
+        button { padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer; }
         button:hover { background: #2980b9; }
-        .card-container { display: flex; gap: 10px; overflow-x: auto; padding: 10px; }
-        .card { width: 150px; height: 100px; border: 2px solid #3498db; display: flex; align-items: center; justify-content: center; background: #fff; cursor: pointer; border-radius: 8px; text-align: center; }
-        .card:hover { background: #3498db; color: white; }
+        .feedback { font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <h1>🚀 Central de Estudos Francês A1</h1>
+<div class="container">
+    <h1>🚀 Curso de Francês A1: Idney Max</h1>
 
-    <!-- 1. Flashcards -->
+    <!-- AULA 8: Relatório -->
     <div class="box">
-        <h2>Flashcards: Vocabulário</h2>
-        <div class="card-container">
-            <div class="card" onclick="alert('Eu falei')">J'ai parlé</div>
-            <div class="card" onclick="alert('Você terminou')">Tu as fini</div>
-            <div class="card" onclick="alert('Nós escolhemos')">Nous avons choisi</div>
-            <div class="card" onclick="alert('Eu me levanto')">Je me lève</div>
-            <div class="card" onclick="alert('Siga em frente')">Tout droit</div>
-        </div>
-    </div>
-
-    <!-- 2. Desafio Final (Relatório) -->
-    <div class="box">
-        <h2>Desafio: Relatório do Recepcionista</h2>
-        <p>1. À 7h, je <input type="text" id="df1"> (arriver) à l'hôtel.</p>
-        <p>2. Le client <input type="text" id="df2"> (vouloir) une chambre.</p>
-        <p>3. J' <input type="text" id="df3"> (accueillir) le client.</p>
+        <h2>Aula 8: Relatório de Trabalho</h2>
+        <p>1. "À 7h, je <input type="text" id="df1" placeholder="suis arrivé"> (arriver) à l'hôtel."</p>
+        <p>2. "Le client <input type="text" id="df2" placeholder="a voulu"> (vouloir) une chambre."</p>
         <button onclick="validarRelatorio()">Validar Relatório</button>
-        <p id="resRelatorio"></p>
+        <p id="resRelatorio" class="feedback"></p>
     </div>
 
-    <!-- 3. Desafio Auxiliares -->
+    <!-- AULA 9 & 10: Auxiliares e Vontades -->
     <div class="box">
-        <h2>Desafio: Avoir vs Être</h2>
-        <p>1. J' <input type="text" id="a1"> mangé. | 2. Je <input type="text" id="a2"> allé.</p>
-        <button onclick="validarAux()">Validar Auxiliares</button>
-        <p id="resAux"></p>
+        <h2>Aula 9 & 10: Gramática Essencial</h2>
+        <p>1. "Je <input type="text" id="a1" placeholder="suis"> (auxiliar être) allé."</p>
+        <p>2. "Je <input type="text" id="a2" placeholder="veux"> (vouloir) un café."</p>
+        <button onclick="validarGramatica()">Validar Gramática</button>
+        <p id="resGramatica" class="feedback"></p>
     </div>
 
-    <!-- 4. Roleplays -->
+    <!-- AULA 11: Rotina -->
     <div class="box">
-        <h2>Roleplay: Atendimento (Café & Hotel)</h2>
-        <p><b>Café:</b> "Vous voulez une table pour combien de personnes?"</p>
-        <input type="text" id="cafeInput"><button onclick="validarCafe()">Responder</button>
-        <p id="cafeFeed"></p>
-        
-        <p><b>Hotel:</b> "J'ai une réservation au nom de Rodrigues."</p>
-        <input type="text" id="hotelInput"><button onclick="validarHotel()">Responder</button>
-        <p id="hotelFeed"></p>
+        <h2>Aula 11: Verbos Reflexivos</h2>
+        <p>1. "Le matin, je <input type="text" id="r1" placeholder="me lève"> (se lever) à 7h."</p>
+        <p>2. "Je <input type="text" id="r2" placeholder="m'habille"> (s'habiller) avec mon uniforme."</p>
+        <button onclick="validarRotina()">Validar Rotina</button>
+        <p id="resRotina" class="feedback"></p>
     </div>
 
-    <script>
-        function validarRelatorio() {
-            let acertos = 0;
-            if (document.getElementById('df1').value.toLowerCase() === "suis arrivé") acertos++;
-            if (document.getElementById('df2').value.toLowerCase() === "a voulu") acertos++;
-            if (document.getElementById('df3').value.toLowerCase() === "ai accueilli") acertos++;
-            document.getElementById('resRelatorio').innerHTML = "Acertos: " + acertos + "/3";
-        }
+    <!-- AULA 12: Roleplay Café -->
+    <div class="box">
+        <h2>Roleplay: Au Café</h2>
+        <p><b>Garçom:</b> "Vous voulez une table pour combien de personnes?"</p>
+        <input type="text" id="cafeInput" placeholder="Une table pour...">
+        <button onclick="validarCafe()">Enviar Resposta</button>
+        <p id="cafeFeed" class="feedback"></p>
+    </div>
 
-        function validarAux() {
-            let acertos = 0;
-            if (document.getElementById('a1').value.toLowerCase() === "ai") acertos++;
-            if (document.getElementById('a2').value.toLowerCase() === "suis") acertos++;
-            document.getElementById('resAux').innerHTML = "Acertos: " + acertos + "/2";
-        }
+    <!-- AULA 13: Roleplay Hotel -->
+    <div class="box">
+        <h2>Roleplay: Check-in Hotel</h2>
+        <p><b>Hóspede:</b> "J'ai une réservation au nom de Rodrigues."</p>
+        <input type="text" id="hotelInput" placeholder="Bonjour...">
+        <button onclick="validarHotel()">Enviar Resposta</button>
+        <p id="hotelFeed" class="feedback"></p>
+    </div>
+</div>
 
-        function validarCafe() {
-            let r = document.getElementById('cafeInput').value.toLowerCase();
-            document.getElementById('cafeFeed').innerHTML = r.includes("deux") ? "Bravo! Próximo: Qu'est-ce que vous voulez boire?" : "Tente: Une table pour deux.";
-        }
+<script>
+    function validarRelatorio() {
+        let r1 = document.getElementById('df1').value.toLowerCase().trim();
+        let r2 = document.getElementById('df2').value.toLowerCase().trim();
+        document.getElementById('resRelatorio').innerHTML = (r1 === "suis arrivé" && r2 === "a voulu") ? "✅ Perfeito!" : "❌ Tente novamente.";
+    }
 
-        function validarHotel() {
-            let r = document.getElementById('hotelInput').value.toLowerCase();
-            document.getElementById('hotelFeed').innerHTML = (r.includes("bonjour") || r.includes("bienvenue")) ? "Excelente! Próximo: 'Voici votre clé'." : "Tente um cumprimento formal.";
-        }
-    </script>
+    function validarGramatica() {
+        let r1 = document.getElementById('a1').value.toLowerCase().trim();
+        let r2 = document.getElementById('a2').value.toLowerCase().trim();
+        document.getElementById('resGramatica').innerHTML = (r1 === "suis" && r2 === "veux") ? "✅ Excelente!" : "❌ Revise os auxiliares e o verbo vouloir.";
+    }
+
+    function validarRotina() {
+        let r1 = document.getElementById('r1').value.toLowerCase().trim();
+        let r2 = document.getElementById('r2').value.toLowerCase().trim();
+        document.getElementById('resRotina').innerHTML = (r1 === "me lève" && r2 === "m'habille") ? "✅ Rotina impecável!" : "❌ Atenção aos pronomes reflexivos.";
+    }
+
+    function validarCafe() {
+        let r = document.getElementById('cafeInput').value.toLowerCase();
+        document.getElementById('cafeFeed').innerHTML = r.includes("deux") ? "✅ Très bien!" : "❌ Tente: 'Une table pour deux, s'il vous plaît.'";
+    }
+
+    function validarHotel() {
+        let r = document.getElementById('hotelInput').value.toLowerCase();
+        document.getElementById('hotelFeed').innerHTML = r.includes("bonjour") ? "✅ Bienvenue! Siga para a próxima etapa." : "❌ Comece com um cumprimento formal (Bonjour).";
+    }
+</script>
+
 </body>
 </html>
