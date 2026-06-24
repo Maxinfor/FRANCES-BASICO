@@ -11,9 +11,10 @@
         #progress-fill { background: #2ecc71; height: 100%; width: 12.5%; transition: width 0.5s; }
         button { background: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 20px; }
         button:hover { background: #2980b9; }
-        .audio-btn { background: #27ae60; padding: 2px 8px; font-size: 0.8em; margin-left: 10px; border-radius: 3px; }
-        ul { list-style: none; padding: 0; }
+        .audio-btn { background: #27ae60; padding: 2px 8px; font-size: 0.8em; margin-left: 10px; border-radius: 3px; border: none; color: white; cursor: pointer; }
+        .audio-btn:hover { background: #219150; }
         li { margin-bottom: 10px; padding: 10px; background: white; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        ul { list-style: none; padding: 0; }
     </style>
 </head>
 <body>
@@ -37,17 +38,16 @@
                 titulo: "Aula 1: Présentation",
                 introducao: "Nesta lição, aprenderá a fazer saudações e a apresentar-se.",
                 cumprimentos: ["Bonjour", "Salut", "Bonsoir"],
-                gramatica: ["Je suis", "Tu es", "Il/Elle est", "Nous sommes", "Vous êtes", "Ils/Elles sont"]
+                gramatica: ["Je suis", "Tu es", "Il est", "Elle est", "Nous sommes", "Vous êtes"]
             }
         };
 
-        // Função de Áudio Nativa (Web Speech API)
-        function tocarAudio(texto) {
-            const msg = new SpeechSynthesisUtterance();
-            msg.text = texto;
-            msg.lang = 'fr-FR'; 
-            msg.rate = 0.9;
-            window.speechSynthesis.speak(msg);
+        // Função de Áudio de Nativo (Motor Neural do Google)
+        function tocarAudioNativo(texto) {
+            // URL que acessa o motor de voz neural de alta qualidade do Google
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=tw-ob&q=${encodeURIComponent(texto)}`;
+            const audio = new Audio(url);
+            audio.play();
         }
 
         function carregarAula(num) {
@@ -63,13 +63,13 @@
                 <h3>1. Comunicação</h3>
                 <ul>
                     ${aula.cumprimentos.map(c => `
-                        <li>${c} <button class="audio-btn" onclick="tocarAudio('${c}')">▶ Ouvir</button></li>
+                        <li>${c} <button class="audio-btn" onclick="tocarAudioNativo('${c}')">▶ Ouvir Nativo</button></li>
                     `).join('')}
                 </ul>
                 <h3>2. Gramática: Verbo Être</h3>
                 <ul>
                     ${aula.gramatica.map(g => `
-                        <li>${g} <button class="audio-btn" onclick="tocarAudio('${g}')">▶ Ouvir</button></li>
+                        <li>${g} <button class="audio-btn" onclick="tocarAudioNativo('${g}')">▶ Ouvir Nativo</button></li>
                     `).join('')}
                 </ul>
             `;
