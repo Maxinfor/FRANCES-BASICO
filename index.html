@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -35,18 +35,11 @@
             }
         };
 
-        // Função de Áudio Nativa (Gera a voz na hora, sem arquivos externos)
-        function tocarAudio(texto) {
-            window.speechSynthesis.cancel(); // Limpa qualquer áudio anterior
-            const msg = new SpeechSynthesisUtterance(texto);
-            msg.lang = 'fr-FR'; // Idioma Francês
-            msg.rate = 0.85;    // Ritmo ideal para aprendizado
-            
-            // Tenta pegar uma voz nativa do sistema
-            const vozes = window.speechSynthesis.getVoices();
-            msg.voice = vozes.find(v => v.lang === 'fr-FR') || vozes[0];
-            
-            window.speechSynthesis.speak(msg);
+        // Função que gera áudio de voz nativa através do motor do Google
+        function tocarAudioNativo(texto) {
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=tw-ob&q=${encodeURIComponent(texto)}`;
+            const audio = new Audio(url);
+            audio.play();
         }
 
         function carregarAula(num) {
@@ -54,20 +47,17 @@
             let html = `<h1>${aula.titulo}</h1><h3>Comunicação</h3><ul>`;
             
             aula.cumprimentos.forEach(t => {
-                html += `<li>${t} <button class="audio-btn" onclick="tocarAudio('${t}')">▶ Ouvir Nativo</button></li>`;
+                html += `<li>${t} <button class="audio-btn" onclick="tocarAudioNativo('${t}')">▶ Ouvir Nativo</button></li>`;
             });
             
             html += `</ul><h3>Gramática</h3><ul>`;
             aula.gramatica.forEach(t => {
-                html += `<li>${t} <button class="audio-btn" onclick="tocarAudio('${t}')">▶ Ouvir Nativo</button></li>`;
+                html += `<li>${t} <button class="audio-btn" onclick="tocarAudioNativo('${t}')">▶ Ouvir Nativo</button></li>`;
             });
             
             document.getElementById('conteudo-aula').innerHTML = html;
         }
 
-        // Garante que o motor de voz esteja pronto
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-        
         window.onload = () => carregarAula(1);
     </script>
 </body>
