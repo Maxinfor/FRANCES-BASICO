@@ -2,15 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Francês Básico - Aula 1</title>
+    <title>Francês Básico - App de Estudos</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; margin: 0; background-color: #f4f4f9; }
         .sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; box-sizing: border-box; }
         .content { flex-grow: 1; padding: 40px; }
-        .progress-bar { background: #34495e; height: 10px; border-radius: 5px; margin: 10px 0; overflow: hidden; }
-        #progress-fill { background: #2ecc71; height: 100%; width: 12.5%; transition: width 0.5s; }
-        button { background: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; }
-        .audio-btn { background: #27ae60; padding: 5px 10px; font-size: 0.8em; margin-left: 10px; border-radius: 3px; border: none; color: white; cursor: pointer; }
+        .audio-btn { background: #27ae60; padding: 5px 10px; font-size: 0.9em; margin-left: 10px; border-radius: 3px; border: none; color: white; cursor: pointer; }
         li { margin-bottom: 10px; padding: 12px; background: white; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; }
         ul { list-style: none; padding: 0; }
     </style>
@@ -19,7 +16,6 @@
 
     <nav class="sidebar">
         <h2>Francês Básico</h2>
-        <div class="progress-bar"><div id="progress-fill"></div></div>
         <ul>
             <li><a href="#" style="color:white; text-decoration:none;" onclick="carregarAula(1)">Aula 1: Présentation</a></li>
         </ul>
@@ -27,47 +23,51 @@
 
     <main class="content" id="conteudo-aula">
         <h1>Bem-vindo</h1>
-        <p>Selecione a aula no menu lateral.</p>
+        <p>Clique em uma aula para começar.</p>
     </main>
 
     <script>
         const lecons = {
             1: {
                 titulo: "Aula 1: Présentation",
-                cumprimentos: [
-                    { texto: "Bonjour", arquivo: "luvvoice.com-20260624-9tt6et.mp3" },
-                    { texto: "Salut", arquivo: "luvvoice.com-20260624-z07cjN.mp3" },
-                    { texto: "Bonsoir", arquivo: "luvvoice.com-20260624-35QxrB.mp3" }
-                ],
-                gramatica: [
-                    { texto: "Je suis", arquivo: "luvvoice.com-20260624-BA9ITr.mp3" },
-                    { texto: "Tu es", arquivo: "luvvoice.com-20260624-3a71zm.mp3" },
-                    { texto: "Il/Elle est", arquivo: "luvvoice.com-20260624-EBqaSL.mp3" },
-                    { texto: "Nous sommes", arquivo: "luvvoice.com-20260624-iFopdb.mp3" },
-                    { texto: "Vous êtes", arquivo: "luvvoice.com-20260624-38Ehwc.mp3" },
-                    { texto: "Ils/Elles sont", arquivo: "luvvoice.com-20260624-64ALna.mp3" }
-                ]
+                cumprimentos: ["Bonjour", "Salut", "Bonsoir"],
+                gramatica: ["Je suis", "Tu es", "Il est", "Elle est", "Nous sommes", "Vous êtes"]
             }
         };
 
-        function tocarAudio(arquivo) {
-            new Audio(arquivo).play();
+        // Função de Áudio Nativa (Gera a voz na hora, sem arquivos externos)
+        function tocarAudio(texto) {
+            window.speechSynthesis.cancel(); // Limpa qualquer áudio anterior
+            const msg = new SpeechSynthesisUtterance(texto);
+            msg.lang = 'fr-FR'; // Idioma Francês
+            msg.rate = 0.85;    // Ritmo ideal para aprendizado
+            
+            // Tenta pegar uma voz nativa do sistema
+            const vozes = window.speechSynthesis.getVoices();
+            msg.voice = vozes.find(v => v.lang === 'fr-FR') || vozes[0];
+            
+            window.speechSynthesis.speak(msg);
         }
 
         function carregarAula(num) {
             const aula = lecons[num];
-            let html = `<h1>${aula.titulo}</h1><h3>1. Comunicação</h3><ul>`;
-            aula.cumprimentos.forEach(item => {
-                html += `<li>${item.texto} <button class="audio-btn" onclick="tocarAudio('${item.arquivo}')">▶ Ouvir</button></li>`;
+            let html = `<h1>${aula.titulo}</h1><h3>Comunicação</h3><ul>`;
+            
+            aula.cumprimentos.forEach(t => {
+                html += `<li>${t} <button class="audio-btn" onclick="tocarAudio('${t}')">▶ Ouvir Nativo</button></li>`;
             });
-            html += `</ul><h3>2. Gramática: Verbo Être</h3><ul>`;
-            aula.gramatica.forEach(item => {
-                html += `<li>${item.texto} <button class="audio-btn" onclick="tocarAudio('${item.arquivo}')">▶ Ouvir</button></li>`;
+            
+            html += `</ul><h3>Gramática</h3><ul>`;
+            aula.gramatica.forEach(t => {
+                html += `<li>${t} <button class="audio-btn" onclick="tocarAudio('${t}')">▶ Ouvir Nativo</button></li>`;
             });
-            html += `</ul>`;
+            
             document.getElementById('conteudo-aula').innerHTML = html;
         }
 
+        // Garante que o motor de voz esteja pronto
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        
         window.onload = () => carregarAula(1);
     </script>
 </body>
